@@ -4,5 +4,9 @@ orbs:
 workflows:
   build:
     jobs:
-      - cypress-io/run:
-          yarn: true
+      - cypress/install:
+          pre-steps:
+            - run: 'echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc'
+      - cypress/run:
+          requires:
+            - cypress/install
